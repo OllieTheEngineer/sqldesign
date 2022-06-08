@@ -11,16 +11,7 @@ CREATE TABLE passengers
 (
   id SERIAL PRIMARY KEY,
   first_name TEXT NOT NULL,
-  last_name TEXT NOT NULL,
-);
-
-CREATE TABLE tickets
-(
-  id SERIAL PRIMARY KEY,
-  seat TEXT NOT NULL,
-  departure TIMESTAMP NOT NULL,
-  arrival TIMESTAMP NOT NULL,
-  passenger_id INTEGER REFERENCES passenger
+  last_name TEXT NOT NULL
 );
 
 CREATE TABLE flight
@@ -32,6 +23,17 @@ CREATE TABLE flight
   to_city TEXT NOT NULL,
   to_country TEXT NOT NULL
 );
+
+CREATE TABLE tickets
+(
+  id SERIAL PRIMARY KEY,
+  seat TEXT NOT NULL,
+  departure TIMESTAMP NOT NULL,
+  arrival TIMESTAMP NOT NULL,
+  passenger_id INTEGER REFERENCES passengers,
+  flight_id INTEGER REFERENCES flight
+);
+
 
 INSERT INTO tickets
   (seat, departure, arrival)
